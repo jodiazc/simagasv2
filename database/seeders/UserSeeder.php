@@ -38,13 +38,13 @@ class UserSeeder extends Seeder
             )->assignRole('Administrador'); // Asignar el rol
         }
 
-       
+
         /*User::create([
             'name' => 'Jorge Díaz',
             'email' => 'jodiazc@gmail.com',
             'password' => bcrypt('36168055'),
         ])->assignRole('Administrador');*/
 
-        User::factory(50)->create();
+        //User::factory(50)->create();
     }
 }
