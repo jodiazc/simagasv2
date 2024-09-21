@@ -334,23 +334,23 @@ return [
             'text' => 'Roles',
             'route' => 'admin.roles.index',
             'icon' => 'fas fa-users-cog',
-            /*'can' => 'admin.users.index',*/
-        ],        
+            'can' => 'admin.roles.index',
+        ],
         [
             'text' => 'Pagos',
-            'icon' => 'fas fa-fw fa-money-bill-wave', 
+            'icon' => 'fas fa-fw fa-money-bill-wave',
             'submenu' => [
                 [
                     'text' => 'Listado de pagos',
                     'route' => 'admin.payments.index',
-                    'icon' => 'fas fa-fw fa-list', 
+                    'icon' => 'fas fa-fw fa-list',
                 ],
                 [
                     'text' => 'Importacion',
                     'route' => 'admin.payments.create',
-                    'icon' => 'fas fa-fw fa-file-import', 
+                    'icon' => 'fas fa-fw fa-file-import',
                     'can' => 'admin.payments.create',
-                ]               
+                ]
             ],
         ],
 
