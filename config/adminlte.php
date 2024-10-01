@@ -337,8 +337,15 @@ return [
             'can' => 'admin.roles.index',
         ],
         [
+            'text' => 'Carga de archivos',
+            'route' => 'admin.upload_files.index',
+            'icon' => 'fas fa-users-cog',
+            'can' => 'admin.upload_files.index',
+        ],
+        [
             'text' => 'Pagos',
             'icon' => 'fas fa-fw fa-money-bill-wave',
+            'can' => 'admin.payments.index',
             'submenu' => [
                 [
                     'text' => 'Listado de pagos',
