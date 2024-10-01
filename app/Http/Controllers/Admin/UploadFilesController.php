@@ -25,21 +25,30 @@ class UploadFilesController extends Controller
         $request->validate([
             'file' => 'required|file|mimes:jpg,png,pdf,csv,xlsx|max:2048',
         ]);
+
         $originalName = $request->file('file')->getClientOriginalName();
         $path = $request->file('file')->storeAs('public/uploads', $originalName);
 
         $uploadFile = new UploadFile();
-        $uploadFile->filename = $request->file('file')->getClientOriginalName();
-        $uploadFile->path = $path;
+        $uploadFile->filename = $originalName; // Guarda el nombre original
+        $uploadFile->path = $path; // Guarda la ruta en storage
         $uploadFile->save();
 
         return redirect()->route('admin.upload_files.index')->with('success', 'Archivo subido correctamente.');
     }
 
-    public function show($id)
+    public function showFile($filename)
     {
-        $file = UploadFile::findOrFail($id);
-        return view('admin.upload_files.show', compact('file'));
+        $path = storage_path('app/public/uploads/' . $filename);
+
+        \Log::info('Trying to access file at: ' . $path);
+
+        if (!file_exists($path)) {
+            \Log::error('File not found: ' . $path);
+            abort(404);
+        }
+
+        return response()->file($path);
     }
 
     public function edit($id)
@@ -58,9 +67,10 @@ class UploadFilesController extends Controller
 
         if ($request->hasFile('file')) {
             Storage::delete($uploadFile->path);
-            $path = $request->file('file')->store('uploads');
+            $originalName = $request->file('file')->getClientOriginalName();
+            $path = $request->file('file')->storeAs('public/uploads', $originalName);
 
-            $uploadFile->filename = $request->file('file')->getClientOriginalName();
+            $uploadFile->filename = $originalName;
             $uploadFile->path = $path;
         }
 

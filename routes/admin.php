@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UploadFilesController;
+use App\Http\Controllers\Admin\FileController;
 
 Route::get('',[HomeController::class,'index'])->name('admin.home');
 Route::resource('payments', PaymentLinkController::class)->names([
@@ -43,3 +44,7 @@ Route::prefix('/upload-files')->group(function () {
     Route::put('/{id}', [UploadFilesController::class, 'update'])->name('admin.upload_files.update');
     Route::delete('/{id}', [UploadFilesController::class, 'destroy'])->name('admin.upload_files.destroy');
 });
+
+Route::get('/admin/files/{filename}', [UploadFilesController::class, 'showFile'])->name('admin.upload_files.showFile');
+
+//Route::get('/admin/files/{filename}', [FileController::class, 'show']);
