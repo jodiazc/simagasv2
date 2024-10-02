@@ -13,6 +13,7 @@ class ApiPaymentLinkController extends Controller
     public function makePayment($amount,$currency,$orderId)
     {
         // Recuperar valores del archivo .env
+        $apiUrl = env('URL_FIRSTDATA');
         $apiKey = env('API_KEY');
         $apiSecret = env('API_SECRET');
 
@@ -57,7 +58,7 @@ class ApiPaymentLinkController extends Controller
 
         // Enviar la solicitud HTTP con headers y payload
         $response = Http::withHeaders($headers)
-            ->post('https://cert.api.firstdata.com/gateway/v2/payment-url', $payload);
+            ->post($apiUrl, $payload);
 
 
             Log::info('RespuestaGeneral', [

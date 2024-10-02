@@ -45,6 +45,6 @@ Route::prefix('/upload-files')->group(function () {
     Route::delete('/{id}', [UploadFilesController::class, 'destroy'])->name('admin.upload_files.destroy');
 });
 
-Route::get('/admin/files/{filename}', [UploadFilesController::class, 'showFile'])->name('admin.upload_files.showFile');
+Route::get('/uploads/files/{filename}', [UploadFilesController::class, 'showFile'])->name('admin.upload_files.showFile');
 
 //Route::get('/admin/files/{filename}', [FileController::class, 'show']);

@@ -28,7 +28,7 @@
                     <td>{{ $file->id }}</td>
                     <td>{{ $file->filename }}</td>
                     <td>
-                        <a href="{{ url('/admin/files/' . $file->filename) }}" class="btn btn-info" target="_blank">Ver Archivo</a>
+                        <a href="{{ url('/uploads/files/' . $file->filename) }}" class="btn btn-info" target="_blank">Ver Archivo</a>
                         <a href="{{ route('admin.upload_files.edit', $file->id) }}" class="btn btn-warning">Editar</a>
                         <form action="{{ route('admin.upload_files.destroy', $file->id) }}" method="POST" style="display:inline;">
                             @csrf
