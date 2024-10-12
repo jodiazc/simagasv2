@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class ApiPaymentLinkController extends Controller
 {
-    public function makePayment($amount,$currency,$orderId)
+    public function makePayment($amount,$currency,$orderId,$fechaExpiracion)
     {
         // Recuperar valores del archivo .env
         $apiUrl = env('URL_FIRSTDATA');
@@ -38,7 +38,8 @@ class ApiPaymentLinkController extends Controller
                 "language" => "es_MX",
                 "country" => "MX"
             ],
-            "orderId" => $orderId
+            "orderId" => $orderId,
+            "expiration" => $fechaExpiracion
         ];
 
         // Convertir el payload a JSON

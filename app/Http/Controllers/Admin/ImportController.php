@@ -19,19 +19,19 @@ class ImportController extends Controller
         ]);
 
         $file = $request->file('file');
-        
+
         // Leer el contenido del archivo CSV
         $fileContents = file($file->getPathname());
-        
+
         // Omitir el primer renglón (encabezados)
         $dataRows = array_slice($fileContents, 1);
         $paymentController = new ApiPaymentLinkController();
-        
+
         $startTime = Carbon::now();
-        
+
         foreach ($dataRows as $line) {
             $data = str_getcsv($line);
-            
+
             // Asegúrate de que los índices del array correspondan a las columnas esperadas
             $tipoLiga = $data[1] ?? null;
             $dlectura = $data[2] ?? null;
@@ -45,7 +45,7 @@ class ImportController extends Controller
             $transactionId = null;
 
             // Ejecutar la función de pago
-            $response = $paymentController->makePayment($importe, 'MXN', $pedido);
+            $response = $paymentController->makePayment($importe, 'MXN', $pedido,$fecha_expiracion);
 
             if (isset($response['requestStatus']) && $response['requestStatus'] === 'SUCCESS') {
                 // Acceder a elementos específicos de la respuesta
